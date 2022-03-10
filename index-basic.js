@@ -31,19 +31,19 @@ let snake1 = {
     score: 0,
 }
 
-let snake2 = {
-    color: "blue",
-    position: initPosition(),
-    direction: initDirection(),
-    score: 0,
-}
+// let snake2 = {
+//     color: "blue",
+//     position: initPosition(),
+//     direction: initDirection(),
+//     score: 0,
+// }
 
-let snake3 = {
-    color: "green",
-    position: initPosition(),
-    direction: initDirection(),
-    score: 0,
-}
+// let snake3 = {
+//     color: "green",
+//     position: initPosition(),
+//     direction: initDirection(),
+//     score: 0,
+// }
 
 //apple image
 let apple = {
@@ -91,8 +91,8 @@ function draw() {
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
         
         drawCell(ctx, snake1.position.x, snake1.position.y, snake1.color);
-        drawCell(ctx, snake2.position.x, snake2.position.y, snake2.color);
-        drawCell(ctx, snake3.position.x, snake3.position.y, snake3.color);
+        // drawCell(ctx, snake2.position.x, snake2.position.y, snake2.color);
+        // drawCell(ctx, snake3.position.x, snake3.position.y, snake3.color);
         drawBuah(ctx, apple.position.x, apple.position.y, apple.color);
         drawBuah(ctx, apple2.position.x, apple2.position.y, apple2.color);
 
@@ -184,27 +184,27 @@ document.addEventListener("keydown", function (event) {
         snake1.direction = DIRECTION.DOWN;
     }
 
-    if (event.key === "a") {
-        snake2.direction = DIRECTION.LEFT;
-    } else if (event.key === "d") {
-        snake2.direction = DIRECTION.RIGHT;
-    } else if (event.key === "w") {
-        snake2.direction = DIRECTION.UP;
-    } else if (event.key === "s") {
-        snake2.direction = DIRECTION.DOWN;
-    }
+    // if (event.key === "a") {
+    //     snake2.direction = DIRECTION.LEFT;
+    // } else if (event.key === "d") {
+    //     snake2.direction = DIRECTION.RIGHT;
+    // } else if (event.key === "w") {
+    //     snake2.direction = DIRECTION.UP;
+    // } else if (event.key === "s") {
+    //     snake2.direction = DIRECTION.DOWN;
+    // }
     
-    if (event.key === "j") {
-        snake3.direction = DIRECTION.LEFT;
-    } else if (event.key === "l") {
-        snake3.direction = DIRECTION.RIGHT;
-    } else if (event.key === "i") {
-        snake3.direction = DIRECTION.UP;
-    } else if (event.key === "k") {
-        snake3.direction = DIRECTION.DOWN;
-    }
+    // if (event.key === "j") {
+    //     snake3.direction = DIRECTION.LEFT;
+    // } else if (event.key === "l") {
+    //     snake3.direction = DIRECTION.RIGHT;
+    // } else if (event.key === "i") {
+    //     snake3.direction = DIRECTION.UP;
+    // } else if (event.key === "k") {
+    //     snake3.direction = DIRECTION.DOWN;
+    // }
 })
 
 move(snake1);
-move(snake2);
-move(snake3);
+// move(snake2);
+// move(snake3);
