@@ -26,6 +26,8 @@
         var STAGE_HEIGHT = 0;					//Height of stage
             //Gloabl Game status and some switch
         var GAME_STATUS = true;					//The Status of game(true is runing , false is died)    
+        var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another walll
+
     
     
     
