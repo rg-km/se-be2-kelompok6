@@ -554,8 +554,10 @@
             Pause();
             draw();
             GAME_STATUS = false;
-            PANEL_BUTTONS[3].text = "ReStart";
+            PANEL_BUTTONS[3].text = "Restart";
             drawButton(PANEL_BUTTONS[3],"red");
+            var audio = new Audio('assets/game-over.mp3');
+            audio.play();
             ctx.globalAlpha = 0.9;
             ctx.fillStyle = "black";
             ctx.fillRect(STAGE_MARGIN, 0, STAGE_WIDTH, STAGE_HEIGHT);
