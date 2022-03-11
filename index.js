@@ -166,7 +166,7 @@ function checkCollision(snakes) {
     }
     if (isCollide) {
         // Soal no 5: Add game over audio:
-        var audio = new Audio('game-over.mp3');
+        var audio = new Audio('assets/game-over.mp3');
         audio.play();
 
         alert("Game over");
