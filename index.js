@@ -26,7 +26,7 @@
         var STAGE_HEIGHT = 0;					//Height of stage
             //Gloabl Game status and some switch
         var GAME_STATUS = true;					//The Status of game(true is runing , false is died)    
-        var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another walll
+        var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another wall
 
     
     
@@ -42,9 +42,18 @@
             //init Buttons in Panel
         function initButtons() {
             //define text and click event in array to next looping
-            var texts = ["Level: 1", "Pause"];
+            var texts = ["Wall: OFF", "Level: 1", "Pause"];
             var events = [
-                
+                function () {
+                    if(ALLOW_INWALL){
+                        ALLOW_INWALL = false;
+                        PANEL_BUTTONS[0].text = "Wall:ON";
+                    }else{
+                        ALLOW_INWALL = true;
+                        PANEL_BUTTONS[0].text = "Wall:OFF";
+                    }
+                    drawButton(PANEL_BUTTONS[0]);
+                },
                 function () {
                     if (Interval == null) {
                         if(GAME_STATUS){
