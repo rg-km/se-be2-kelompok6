@@ -27,10 +27,10 @@
             //Gloabl Game status and some switch
         var GAME_STATUS = true;					//The Status of game(true is runing , false is died)    
         var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another wall
+        var ALLOW_STONE = true;					//Whatever allow producing stone while snake ate a food if the SCORE is not too little
 
-    
-    
-    
+
+
     
         //init Functions
             //init Panel's size
@@ -42,17 +42,29 @@
             //init Buttons in Panel
         function initButtons() {
             //define text and click event in array to next looping
-            var texts = ["Wall: OFF", "Level: 1", "Pause"];
+            var texts = ["Wall: OFF", "Level: 1", "Stone: ON","Pause"];
             var events = [
                 function () {
                     if(ALLOW_INWALL){
                         ALLOW_INWALL = false;
-                        PANEL_BUTTONS[0].text = "Wall:ON";
+                        PANEL_BUTTONS[0].text = "Wall: ON";
                     }else{
                         ALLOW_INWALL = true;
-                        PANEL_BUTTONS[0].text = "Wall:OFF";
+                        PANEL_BUTTONS[0].text = "Wall: OFF";
                     }
                     drawButton(PANEL_BUTTONS[0]);
+                },
+                function () {
+                },
+                function () {
+                    if(ALLOW_STONE){
+                        ALLOW_STONE = false;
+                        PANEL_BUTTONS[2].text = "Stone: OFF";
+                    }else{
+                        ALLOW_STONE = true;
+                        PANEL_BUTTONS[2].text = "Stone: ON";
+                    }
+                    drawButton(PANEL_BUTTONS[2]);
                 },
                 function () {
                     if (Interval == null) {
@@ -358,7 +370,7 @@
                     drawScore();
                     produceSingle("food");
                     if(ALLOW_STONE){
-                        if(30>= SCORE && SCORE >= 7) {
+                        if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
                         }else if(SCORE > 30){
                             produceSingle("stone");
