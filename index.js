@@ -358,7 +358,7 @@
                     drawScore();
                     produceSingle("food");
                     if(ALLOW_STONE){
-                        if(30>= SCORE && SCORE >= 10) {
+                        if(30>= SCORE && SCORE >= 7) {
                             produceSingle("stone");
                         }else if(SCORE > 30){
                             produceSingle("stone");
@@ -374,6 +374,33 @@
             stage_map[coor.x][coor.y] = "snake";   //mark snake after confirming whatever the head crashed
             SNAKE_DIRECTION_LOCK = false;
             
+
+            //change speed base on num of SCORE
+            if(SCORE == 5){
+                Pause();
+                DELAY = 90;
+                PANEL_BUTTONS[1].text = "Level: 2";
+                drawButton(PANEL_BUTTONS[1]);
+                Start();
+            }else if(SCORE == 10){
+                Pause();
+                DELAY = 85;
+                PANEL_BUTTONS[1].text = "Level: 3";
+                drawButton(PANEL_BUTTONS[1]);
+                Start();
+            }else if(SCORE == 15){
+                Pause();
+                DELAY = 70;
+                PANEL_BUTTONS[1].text = "Level: 4";
+                drawButton(PANEL_BUTTONS[1]);
+                Start();
+            }else if(SCORE == 20){
+                Pause();
+                DELAY = 55;
+                PANEL_BUTTONS[1].text = "Level: 5";
+                drawButton(PANEL_BUTTONS[1]);
+                Start();
+            }
         }
     
         
