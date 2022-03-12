@@ -30,8 +30,8 @@
         var ALLOW_STONE = true;					//Whatever allow producing stone while snake ate a food if the SCORE is not too little
 
     
-        // const foodImg = new Image();
-        //foodImg.src = "assets/apple.png";
+        // const food = new Image();
+        // food.src = "assets/apple.png";
         // ctx.drawImage(foodImg, 0, 0, 0);
 
 
@@ -45,29 +45,31 @@
             //init Buttons in Panel
         function initButtons() {
             //define text and click event in array to next looping
-            var texts = ["Wall: OFF", "Level: 1", "Stone: ON","Pause"];
+            var texts = [ "Level: 1","Speed: 120ms", "Wall: OFF", "Stone: ON","Pause"];
             var events = [
+                function () {
+                },
+                function () {
+                },
                 function () {
                     if(ALLOW_INWALL){
                         ALLOW_INWALL = false;
-                        PANEL_BUTTONS[0].text = "Wall: ON";
+                        PANEL_BUTTONS[2].text = "Wall: ON";
                     }else{
                         ALLOW_INWALL = true;
-                        PANEL_BUTTONS[0].text = "Wall: OFF";
+                        PANEL_BUTTONS[2].text = "Wall: OFF";
                     }
-                    drawButton(PANEL_BUTTONS[0]);
-                },
-                function () {
+                    drawButton(PANEL_BUTTONS[2]);
                 },
                 function () {
                     if(ALLOW_STONE){
                         ALLOW_STONE = false;
-                        PANEL_BUTTONS[2].text = "Stone: OFF";
+                        PANEL_BUTTONS[3].text = "Stone: OFF";
                     }else{
                         ALLOW_STONE = true;
-                        PANEL_BUTTONS[2].text = "Stone: ON";
+                        PANEL_BUTTONS[3].text = "Stone: ON";
                     }
-                    drawButton(PANEL_BUTTONS[2]);
+                    drawButton(PANEL_BUTTONS[3]);
                 },
                 function () {
                     if (Interval == null) {
@@ -76,12 +78,12 @@
                         }else{
                             ReStart();
                         }
-                        PANEL_BUTTONS[3].text = "Pause";
+                        PANEL_BUTTONS[4].text = "Pause";
                     } else {
-                        PANEL_BUTTONS[3].text = "Start";
+                        PANEL_BUTTONS[4].text = "Start";
                         Pause();
                     }
-                    drawButton(PANEL_BUTTONS[3]);
+                    drawButton(PANEL_BUTTONS[4]);
                 }
             ];
             PANEL_BUTTONS = [];
@@ -268,11 +270,11 @@
                         ctx.closePath();
                         switch (stage_map[i][j]){
                             case "food":
-                                ctx.fillStyle = "green";
+                                ctx.fillStyle = "red";
                                 // ctx.drawImage(foodImg);
                                 break;
                             case "food1":
-                                ctx.fillStyle = "green";
+                                ctx.fillStyle = "red";
                                 // ctx.drawImage(foodImg);
                                 break;
                             case "stone":
@@ -373,11 +375,11 @@
             switch (stage_map[coor.x][coor.y]) {
                 case "stone" ://Turn to Died when the next head coordinate was marked as stone or snake
                 case "snake" :
-                    head.color = "red";
+                    head.color = "green";
                     return Died();
                     break;
                 case "food" ://Eate a food and do not pop Snake array , so the snake will increase one size
-                    Snake.unshift(new SnakeNode(coor.x, coor.y, "red", direction));
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     SCORE++;
                     drawScore();
                     produceSingle("food");
@@ -393,7 +395,7 @@
                     }
                     break;
                 case "food1" ://Eate a food1 and do not pop Snake array , so the snake will increase one size
-                    Snake.unshift(new SnakeNode(coor.x, coor.y, "red", direction));
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     SCORE++;
                     drawScore();
                     produceSingle("food1");
@@ -409,7 +411,7 @@
                     }
                     break;
                 default :
-                    Snake.unshift(new SnakeNode(coor.x, coor.y, "red", direction));
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     Snake.pop();
             }
     
@@ -421,25 +423,33 @@
             if(SCORE == 5){
                 Pause();
                 DELAY = 90;
-                PANEL_BUTTONS[1].text = "Level: 2";
+                PANEL_BUTTONS[0].text = "Level: 2";
+                drawButton(PANEL_BUTTONS[0]);
+                PANEL_BUTTONS[1].text = "Speed: 90ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 10){
                 Pause();
                 DELAY = 85;
-                PANEL_BUTTONS[1].text = "Level: 3";
+                PANEL_BUTTONS[0].text = "Level: 3";
+                drawButton(PANEL_BUTTONS[0]);
+                PANEL_BUTTONS[1].text = "Speed: 85ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 15){
                 Pause();
                 DELAY = 70;
-                PANEL_BUTTONS[1].text = "Level: 4";
+                PANEL_BUTTONS[0].text = "Level: 4";
+                drawButton(PANEL_BUTTONS[0]);
+                PANEL_BUTTONS[1].text = "Speed: 70ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 20){
                 Pause();
                 DELAY = 55;
-                PANEL_BUTTONS[1].text = "Level: 5";
+                PANEL_BUTTONS[0].text = "Level: 5";
+                drawButton(PANEL_BUTTONS[0]);
+                PANEL_BUTTONS[1].text = "Speed: 55ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }
@@ -525,6 +535,7 @@
         function MouseMove(e) {
             var key = determineButton(e);
             if (typeof key != "undefined") {
+                if(key == 0) return CANVAS.style.cursor = "not-allowed";
                 if(key == 1) return CANVAS.style.cursor = "not-allowed";
             
                 CANVAS.style.cursor = "pointer";
@@ -584,8 +595,8 @@
             Pause();
             draw();
             GAME_STATUS = false;
-            PANEL_BUTTONS[3].text = "Restart";
-            drawButton(PANEL_BUTTONS[3],"red");
+            PANEL_BUTTONS[4].text = "Restart";
+            drawButton(PANEL_BUTTONS[4],"red");
             var audio = new Audio('assets/game-over.mp3');
             audio.play();
             ctx.globalAlpha = 0.9;
@@ -593,7 +604,7 @@
             ctx.fillRect(STAGE_MARGIN, 0, STAGE_WIDTH, STAGE_HEIGHT);
             ctx.globalAlpha = 1;
             ctx.font = "80px serif";
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "green";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.strokeText("You Already Dead !", STAGE_WIDTH / 2 + STAGE_MARGIN, STAGE_HEIGHT / 2);
