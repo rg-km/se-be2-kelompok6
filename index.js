@@ -29,10 +29,12 @@
         var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another wall
         var ALLOW_STONE = true;					//Whatever allow producing stone while snake ate a food if the SCORE is not too little
 
-        // const foodImg = new Image();
-        // foodImg.src = "assets/apple.png";
-
     
+        // const foodImg = new Image();
+        //foodImg.src = "assets/apple.png";
+        // ctx.drawImage(foodImg, 0, 0, 0);
+
+
         //init Functions
             //init Panel's size
         function initPanel() {
@@ -267,11 +269,11 @@
                         switch (stage_map[i][j]){
                             case "food":
                                 ctx.fillStyle = "green";
-                                // ctx.drawImage(foodImg, coor.x, coor.y);
+                                // ctx.drawImage(foodImg);
                                 break;
                             case "food1":
                                 ctx.fillStyle = "green";
-                                // ctx.drawImage(foodImg, coor.x, coor.y);
+                                // ctx.drawImage(foodImg);
                                 break;
                             case "stone":
                                 ctx.fillStyle = "grey";
@@ -379,6 +381,8 @@
                     SCORE++;
                     drawScore();
                     produceSingle("food");
+                    var audio = new Audio('assets/eat.mp3');
+                    audio.play();
                     if(ALLOW_STONE){
                         if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
@@ -393,6 +397,8 @@
                     SCORE++;
                     drawScore();
                     produceSingle("food1");
+                    var audio = new Audio('assets/eat.mp3');
+                    audio.play();
                     if(ALLOW_STONE){
                         if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
