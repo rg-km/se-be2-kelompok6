@@ -2,7 +2,7 @@
 		//Global Snake variable
         var Snake = null;						//Snake Object
         var SNAKENODE_LENGTH = 50;				//Length of each node of Snake's body
-        var SNAKE_SIZE = 6;						//How much size of new born Snake
+        var SNAKE_SIZE = 3;						//How much size of new born Snake
         var SNAKE_DIRECTION = null;				//Direction of next moving
         var SNAKE_DIRECTION_LOCK = false;		//Prevent double or more clicks constantly of two or more different directions , snake will go against if not or others stange thing if not.
         var DELAY = 120;						//Delay of moving Snake , this variable control the snake's speed
@@ -29,7 +29,8 @@
         var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another wall
         var ALLOW_STONE = true;					//Whatever allow producing stone while snake ate a food if the SCORE is not too little
 
-
+        // const foodImg = new Image();
+        // foodImg.src = "assets/apple.png";
 
     
         //init Functions
@@ -167,6 +168,9 @@
             if (stage_map[rand_x][rand_y]) return produceSingle(type);
             if(type == "food"){
                 stage_map[rand_x][rand_y] = "food";
+            }
+            else if(type == "food1"){
+                stage_map[rand_x][rand_y] = "food1";
             }else{
                 stage_map[rand_x][rand_y] = "stone";
             }
@@ -178,7 +182,8 @@
             initStage();
             initMap();
             initSnake();
-            produceSingle("food");//produce food after init of Snake
+            produceSingle("food");
+            produceSingle("food1");//produce food after init of Snake
             ctx = initCanvas();
             bind();
             drawScore();
@@ -262,6 +267,11 @@
                         switch (stage_map[i][j]){
                             case "food":
                                 ctx.fillStyle = "green";
+                                // ctx.drawImage(foodImg, coor.x, coor.y);
+                                break;
+                            case "food1":
+                                ctx.fillStyle = "green";
+                                // ctx.drawImage(foodImg, coor.x, coor.y);
                                 break;
                             case "stone":
                                 ctx.fillStyle = "grey";
@@ -369,6 +379,20 @@
                     SCORE++;
                     drawScore();
                     produceSingle("food");
+                    if(ALLOW_STONE){
+                        if(30>= SCORE && SCORE >= 5) {
+                            produceSingle("stone");
+                        }else if(SCORE > 30){
+                            produceSingle("stone");
+                            produceSingle("stone");
+                        }
+                    }
+                    break;
+                case "food1" ://Eate a food1 and do not pop Snake array , so the snake will increase one size
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "red", direction));
+                    SCORE++;
+                    drawScore();
+                    produceSingle("food1");
                     if(ALLOW_STONE){
                         if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
