@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>Snake Game</title>
+  </head>
+  <script type="text/javascript" src="script.js"></script>
+  <body onload="draw();">
+    <img
+      id="apple"
+      style="display: none"
+      width="20"
+      height="20"
+      src="assets/apple.jpg"
+      alt=""
+    />
+    <img
+      id="appleHealth"
+      style="display: none"
+      width="20"
+      height="20"
+      src="assets/health.png"
+      alt=""
+    />
+    <img
+      id="snake"
+      style="display: none"
+      width="20"
+      height="20"
+      src="assets/snake.jpg"
+      alt=""
+    />
+
+    <div>
+      <button style="background: rgb(189, 175, 189)" onclick="play();">
+        Play
+      </button>
+      <br /><br />
+    </div>
+    <canvas
+      id="snakeBoard"
+      width="600"
+      height="600"
+      style="border: 2px solid #383636"
+    ></canvas>
+    <canvas
+      id="score1Board"
+      width="120"
+      height="120"
+      style="border: 3px solid #383636"
+    >
+    </canvas>
+    <canvas
+      id="health"
+      width="120"
+      height="120"
+      style="border: 3px solid #383636"
+    >
+    </canvas>
+    <canvas
+      id="levelBoard"
+      width="120"
+      height="120"
+      style="border: 3px solid #383636"
+    >
+    </canvas>
+    <canvas
+      id="fastBoard"
+      width="120"
+      height="120"
+      style="border: 3px solid #383636"
+    >
+    </canvas>
+  </body>
+</html>
