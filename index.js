@@ -427,6 +427,8 @@
                 drawButton(PANEL_BUTTONS[0]);
                 PANEL_BUTTONS[1].text = "Speed: 90ms";
                 drawButton(PANEL_BUTTONS[1]);
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
                 Start();
             }else if(SCORE == 10){
                 Pause();
@@ -435,6 +437,8 @@
                 drawButton(PANEL_BUTTONS[0]);
                 PANEL_BUTTONS[1].text = "Speed: 85ms";
                 drawButton(PANEL_BUTTONS[1]);
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
                 Start();
             }else if(SCORE == 15){
                 Pause();
@@ -443,6 +447,8 @@
                 drawButton(PANEL_BUTTONS[0]);
                 PANEL_BUTTONS[1].text = "Speed: 70ms";
                 drawButton(PANEL_BUTTONS[1]);
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
                 Start();
             }else if(SCORE == 20){
                 Pause();
@@ -451,6 +457,8 @@
                 drawButton(PANEL_BUTTONS[0]);
                 PANEL_BUTTONS[1].text = "Speed: 55ms";
                 drawButton(PANEL_BUTTONS[1]);
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
                 Start();
             }
         }
