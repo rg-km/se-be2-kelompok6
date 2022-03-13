@@ -225,9 +225,9 @@
             ctx.fillStyle = "red";
             ctx.textAlign = "center";
             if (HEALTH < 0){
-                ctx.fillText("Life Remaining: 0", 150, 75);
+                ctx.fillText("Health Remaining: 0", 150, 75);
             }else{
-                ctx.fillText("Life Remaining: "+HEALTH, 150, 75);
+                ctx.fillText("Health Remaining: "+HEALTH, 150, 75);
             }
         }
         //draw single button
@@ -378,6 +378,9 @@
             }
     
             if(!ALLOW_INWALL && in_wall){
+                HEALTH = -1;
+                drawScore();
+                drawHealth();
                 return Died();
             }
 
@@ -393,14 +396,17 @@
                         Snake.length -= 1;
                         SCORE--;
                         HEALTH--;
-                        drawScore();
-                        drawHealth();
+                    drawScore();
+                    drawHealth();
                     var audio = new Audio('assets/crash.mp3');
                     audio.play();
                     return Life();
                     break;
                 //Turn to Died when the next head coordinate was marked as snake
                 case "snake" :
+                    HEALTH = -1;
+                    drawScore();
+                    drawHealth();
                     return Died();
                     break;
                 case "food" ://Eate a food and do not pop Snake array , so the snake will increase one size
