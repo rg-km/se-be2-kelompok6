@@ -176,10 +176,27 @@
             }
             else if(type == "food1"){
                 stage_map[rand_x][rand_y] = "food1";
+            }
+            else if(type == "extraHealth"){
+                stage_map[rand_x][rand_y] = "extraHealth";
             }else{
                 stage_map[rand_x][rand_y] = "stone";
             }
         }
+
+        function checkPrime(number) {
+            if (number <= 1) {
+              return false;
+            } else {
+              for (let i = 2; i < number; i++) {
+                if (number % i == 0) {
+                  return false;
+                }
+              }
+              return true;
+            }
+          }
+
         //First init
         function init() {
             initPanel();
@@ -189,6 +206,7 @@
             initSnake();
             produceSingle("food");
             produceSingle("food1");//produce food after init of Snake
+            produceSingle("extraHealth");
             ctx = initCanvas();
             bind();
             drawScore();
@@ -250,17 +268,7 @@
                 drawButton(PANEL_BUTTONS[i]);
             }
         }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
         //draw about Stage Function
         function drawSnake() {
             for (var i = 0; i < Snake.length; i++) {
@@ -275,6 +283,7 @@
                 // ctx.stroke();
             }
         }
+
         //loop stage_map and draw where was marked as food or stone
         function drawSingle() {
             for (var i = 0; i < STAGE_X_COUNT; i++) {
@@ -290,8 +299,14 @@
                             case "food1":
                                 ctx.fillStyle = "red";
                                 break;
+                            case "extraHealth":
+                                if(checkPrime(SCORE)){
+                                ctx.fillStyle = "purple";
+                                break;
+                                }
                             case "stone":
                                 ctx.fillStyle = "grey";
+                                break;
                         }
                         ctx.fill();
                         ctx.strokeStyle = "white";
@@ -320,17 +335,9 @@
                 drawSnake();
             }
         }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
         //Action Funciton
         function moveSnake(direction) {
             var head = Snake[0];
@@ -443,6 +450,16 @@
                             produceSingle("stone");
                         }
                     }
+                    break;
+                case "extraHealth" : //Eate a extraHealth for boost health or life
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
+                    SCORE++;
+                    HEALTH++;
+                    drawScore();
+                    drawHealth();
+                    produceSingle("extraHealth");
+                    var audio = new Audio('assets/eat.mp3');
+                    audio.play();
                     break;
                 default :
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
@@ -631,6 +648,7 @@
             initSnake();
             produceSingle("food");//produce food after init of Snake
             produceSingle("food1");//produce food1 after init of Snake
+            produceSingle("extraHealth");
             drawScore();
             drawHealth();
             Start();
