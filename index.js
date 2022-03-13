@@ -617,7 +617,7 @@
         }
             // Snake Life
         function Life(){
-            if(HEALTH <= 0){
+            if(HEALTH < 0){
                 return Died();
             }
         }
