@@ -192,6 +192,7 @@
             ctx = initCanvas();
             bind();
             drawScore();
+            drawHealth();
             drawButtons();
             Start();
         }
@@ -199,10 +200,7 @@
     
     
     
-    
-    
-    
-    
+
     
         //draw about Pannel Function
         function drawScore() {
@@ -215,10 +213,21 @@
             ctx.fillStyle = "black";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
-            ctx.fillText("Score : " + SCORE, 150, 50);
+            ctx.fillText("Score : " + SCORE, 150, 40);
             if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
                 var audio = new Audio('assets/level-up.mp3');
                 audio.play();
+            }
+        }
+        //draw about Snake Health or Life
+        function drawHealth(){
+            ctx.font = "18px Microsoft Yahei";
+            ctx.fillStyle = "red";
+            ctx.textAlign = "center";
+            if (HEALTH < 0){
+                ctx.fillText("Life Remaining: 0", 150, 75);
+            }else{
+                ctx.fillText("Life Remaining: "+HEALTH, 150, 75);
             }
         }
         //draw single button
@@ -385,6 +394,7 @@
                         SCORE--;
                         HEALTH--;
                         drawScore();
+                        drawHealth();
                     var audio = new Audio('assets/crash.mp3');
                     audio.play();
                     return Life();
@@ -397,6 +407,7 @@
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     SCORE++;
                     drawScore();
+                    drawHealth();
                     produceSingle("food");
                     var audio = new Audio('assets/eat.mp3');
                     audio.play();
@@ -413,6 +424,7 @@
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     SCORE++;
                     drawScore();
+                    drawHealth();
                     produceSingle("food1");
                     var audio = new Audio('assets/eat.mp3');
                     audio.play();
@@ -613,6 +625,7 @@
             produceSingle("food");//produce food after init of Snake
             produceSingle("food1");//produce food1 after init of Snake
             drawScore();
+            drawHealth();
             Start();
         }
             // Snake Life
