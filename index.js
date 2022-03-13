@@ -225,9 +225,9 @@
             ctx.fillStyle = "red";
             ctx.textAlign = "center";
             if (HEALTH < 0){
-                ctx.fillText("Life Remaining: 0", 150, 75);
+                ctx.fillText("Health Remaining: 0", 150, 75);
             }else{
-                ctx.fillText("Life Remaining: "+HEALTH, 150, 75);
+                ctx.fillText("Health Remaining: "+HEALTH, 150, 75);
             }
         }
         //draw single button
