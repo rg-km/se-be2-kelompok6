@@ -422,12 +422,21 @@
             
 
             //change speed base on num of SCORE
-            if(SCORE == 5){
+            if(SCORE == 0){
+                Pause();
+                DELAY = 120;
+                PANEL_BUTTONS[0].text = "Level: 1";
+                drawButton(PANEL_BUTTONS[0]);
+                PANEL_BUTTONS[1].text = "Speed: " + DELAY +"ms";
+                drawButton(PANEL_BUTTONS[1]);
+                Start();
+            }
+            else if(SCORE == 5){
                 Pause();
                 DELAY = 90;
                 PANEL_BUTTONS[0].text = "Level: 2";
                 drawButton(PANEL_BUTTONS[0]);
-                PANEL_BUTTONS[1].text = "Speed: 90ms";
+                PANEL_BUTTONS[1].text = "Speed: " + DELAY +"ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 10){
@@ -435,7 +444,7 @@
                 DELAY = 85;
                 PANEL_BUTTONS[0].text = "Level: 3";
                 drawButton(PANEL_BUTTONS[0]);
-                PANEL_BUTTONS[1].text = "Speed: 85ms";
+                PANEL_BUTTONS[1].text = "Speed: " + DELAY +"ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 15){
@@ -443,7 +452,7 @@
                 DELAY = 70;
                 PANEL_BUTTONS[0].text = "Level: 4";
                 drawButton(PANEL_BUTTONS[0]);
-                PANEL_BUTTONS[1].text = "Speed: 70ms";
+                PANEL_BUTTONS[1].text = "Speed: " + DELAY +"ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }else if(SCORE == 20){
@@ -451,7 +460,7 @@
                 DELAY = 55;
                 PANEL_BUTTONS[0].text = "Level: 5";
                 drawButton(PANEL_BUTTONS[0]);
-                PANEL_BUTTONS[1].text = "Speed: 55ms";
+                PANEL_BUTTONS[1].text = "Speed: " + DELAY +"ms";
                 drawButton(PANEL_BUTTONS[1]);
                 Start();
             }
@@ -588,6 +597,7 @@
             initMap();
             initSnake();
             produceSingle("food");//produce food after init of Snake
+            produceSingle("food1");//produce food1 after init of Snake
             drawScore();
             Start();
         }
