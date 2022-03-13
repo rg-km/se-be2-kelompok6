@@ -215,6 +215,10 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText("Score : " + SCORE, 150, 50);
+            if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
+            }
         }
         //draw single button
         function drawButton(obj,color) {
@@ -407,10 +411,6 @@
                             produceSingle("stone");
                         }
                     }
-                    if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
-                        var audio = new Audio('assets/level-up.mp3');
-                        audio.play();
-                    }
                     break;
                 default :
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
@@ -589,7 +589,6 @@
             initSnake();
             produceSingle("food");//produce food after init of Snake
             drawScore();
-            
             Start();
         }
             //End Game
