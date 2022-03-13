@@ -400,7 +400,7 @@
                     drawHealth();
                     var audio = new Audio('assets/crash.mp3');
                     audio.play();
-                    return Life();
+                    return Died();
                     break;
                 //Turn to Died when the next head coordinate was marked as snake
                 case "snake" :
@@ -642,22 +642,24 @@
         }
             //End Game
         function Died() {
-            Pause();
-            draw();
-            GAME_STATUS = false;
-            PANEL_BUTTONS[4].text = "Restart";
-            drawButton(PANEL_BUTTONS[4],"red");
-            var audio = new Audio('assets/game-over.mp3');
-            audio.play();
-            ctx.globalAlpha = 0.9;
-            ctx.fillStyle = "black";
-            ctx.fillRect(STAGE_MARGIN, 0, STAGE_WIDTH, STAGE_HEIGHT);
-            ctx.globalAlpha = 1;
-            ctx.font = "80px serif";
-            ctx.fillStyle = "green";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.strokeText("You Already Dead !", STAGE_WIDTH / 2 + STAGE_MARGIN, STAGE_HEIGHT / 2);
+            if(HEALTH < 0){
+                Pause();
+                draw();
+                GAME_STATUS = false;
+                PANEL_BUTTONS[4].text = "Restart";
+                drawButton(PANEL_BUTTONS[4],"red");
+                var audio = new Audio('assets/game-over.mp3');
+                audio.play();
+                ctx.globalAlpha = 0.9;
+                ctx.fillStyle = "black";
+                ctx.fillRect(STAGE_MARGIN, 0, STAGE_WIDTH, STAGE_HEIGHT);
+                ctx.globalAlpha = 1;
+                ctx.font = "80px serif";
+                ctx.fillStyle = "green";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.strokeText("You Already Dead !", STAGE_WIDTH / 2 + STAGE_MARGIN, STAGE_HEIGHT / 2);
+                }
             }
     
     
