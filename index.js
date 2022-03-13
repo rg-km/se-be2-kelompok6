@@ -215,6 +215,7 @@
             ctx.textBaseline = "middle";
             ctx.fillText("Score : " + SCORE, 150, 40);
             if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
+                HEALTH += 3;
                 var audio = new Audio('assets/level-up.mp3');
                 audio.play();
             }
@@ -394,7 +395,7 @@
                 Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     //negative snake
                         Snake.length -= 1;
-                        SCORE--;
+                        // SCORE--;
                         HEALTH--;
                     drawScore();
                     drawHealth();
