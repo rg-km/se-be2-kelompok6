@@ -378,6 +378,9 @@
             }
     
             if(!ALLOW_INWALL && in_wall){
+                HEALTH = -1;
+                drawScore();
+                drawHealth();
                 return Died();
             }
 
@@ -393,14 +396,17 @@
                         Snake.length -= 1;
                         SCORE--;
                         HEALTH--;
-                        drawScore();
-                        drawHealth();
+                    drawScore();
+                    drawHealth();
                     var audio = new Audio('assets/crash.mp3');
                     audio.play();
                     return Life();
                     break;
                 //Turn to Died when the next head coordinate was marked as snake
                 case "snake" :
+                    HEALTH = -1;
+                    drawScore();
+                    drawHealth();
                     return Died();
                     break;
                 case "food" ://Eate a food and do not pop Snake array , so the snake will increase one size
