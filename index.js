@@ -15,6 +15,7 @@
         var stage_map = null;					//Map status of each block in coordinate
             //Global Canvas variable
         var SCORE = 0;							//How many food Snake has eaten
+        var HEALTH = 3;                         //How many health snake have
         var PANEL_BUTTONS = null;				//Array of Buttons
         var PANEL_BUTTON_WIDTH = 0;				//Width of each button
         var PANEL_BUTTON_HEIGHT = 0;			//Height of each button
@@ -261,7 +262,7 @@
                 ctx.fill();
                 ctx.lineWidth = 2;
                 ctx.strokeStyle = "white";
-                // ctx.stroke();
+                ctx.stroke();
             }
         }
         //loop stage_map and draw where was marked as food or stone
@@ -370,14 +371,26 @@
             if(!ALLOW_INWALL && in_wall){
                 return Died();
             }
-    
+
+
             head.color = "black";
     
             stage_map[Snake[Snake.length - 1].x][Snake[Snake.length - 1].y] = false; //mark false before pop
             switch (stage_map[coor.x][coor.y]) {
-                case "stone" ://Turn to Died when the next head coordinate was marked as stone or snake
+                //Turn to Died when the next head coordinate was marked as stone or snake
+                case "stone" :
+                Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
+                    //negative snake
+                        Snake.length -= 1;
+                        SCORE--;
+                        HEALTH--;
+                        drawScore();
+                    var audio = new Audio('assets/crash.mp3');
+                    audio.play();
+                    return Life();
+                    break;
+                //Turn to Died when the next head coordinate was marked as snake
                 case "snake" :
-                    head.color = "green";
                     return Died();
                     break;
                 case "food" ://Eate a food and do not pop Snake array , so the snake will increase one size
@@ -593,6 +606,7 @@
         function ReStart(){
             GAME_STATUS = true;
             SCORE = 0;
+            HEALTH = 3;
             initStage();
             initMap();
             initSnake();
@@ -600,6 +614,12 @@
             produceSingle("food1");//produce food1 after init of Snake
             drawScore();
             Start();
+        }
+            // Snake Life
+        function Life(){
+            if(HEALTH <= 0){
+                return Died();
+            }
         }
             //End Game
         function Died() {
@@ -619,7 +639,7 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.strokeText("You Already Dead !", STAGE_WIDTH / 2 + STAGE_MARGIN, STAGE_HEIGHT / 2);
-        }
+            }
     
     
         //ROCK and ROLL
