@@ -271,7 +271,7 @@
                 ctx.fill();
                 ctx.lineWidth = 2;
                 ctx.strokeStyle = "white";
-                ctx.stroke();
+                // ctx.stroke();
             }
         }
         //loop stage_map and draw where was marked as food or stone
