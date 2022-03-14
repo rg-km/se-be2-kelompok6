@@ -30,7 +30,7 @@
         var ALLOW_INWALL = true;				//Whatever allow the snake moves through wall to another wall
         var ALLOW_STONE = true;					//Whatever allow producing stone while snake ate a food if the SCORE is not too little
 
-    
+
         // const food = new Image();
         // food.src = "assets/apple.png";
         // ctx.drawImage(foodImg, 0, 0, 0);
@@ -176,10 +176,28 @@
             }
             else if(type == "food1"){
                 stage_map[rand_x][rand_y] = "food1";
+            }
+            else if(type == "extraHealth"){
+                stage_map[rand_x][rand_y] = "extraHealth";
             }else{
                 stage_map[rand_x][rand_y] = "stone";
             }
         }
+
+        //to check score is prime
+        function checkPrime(number) {
+            if (number <= 1) {
+              return false;
+            } else {
+              for (let i = 2; i < number; i++) {
+                if (number % i == 0) {
+                  return false;
+                }
+              }
+              return true;
+            }
+          }
+
         //First init
         function init() {
             initPanel();
@@ -189,6 +207,7 @@
             initSnake();
             produceSingle("food");
             produceSingle("food1");//produce food after init of Snake
+            // produceSingle("extraHealth");
             ctx = initCanvas();
             bind();
             drawScore();
@@ -250,17 +269,7 @@
                 drawButton(PANEL_BUTTONS[i]);
             }
         }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
         //draw about Stage Function
         function drawSnake() {
             for (var i = 0; i < Snake.length; i++) {
@@ -275,6 +284,7 @@
                 // ctx.stroke();
             }
         }
+
         //loop stage_map and draw where was marked as food or stone
         function drawSingle() {
             for (var i = 0; i < STAGE_X_COUNT; i++) {
@@ -292,6 +302,10 @@
                                 break;
                             case "stone":
                                 ctx.fillStyle = "grey";
+                                break;
+                            case "extraHealth":
+                                ctx.fillStyle = "purple";
+                                break;
                         }
                         ctx.fill();
                         ctx.strokeStyle = "white";
@@ -320,17 +334,9 @@
                 drawSnake();
             }
         }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
         //Action Funciton
         function moveSnake(direction) {
             var head = Snake[0];
@@ -391,6 +397,16 @@
             stage_map[Snake[Snake.length - 1].x][Snake[Snake.length - 1].y] = false; //mark false before pop
             switch (stage_map[coor.x][coor.y]) {
                 //Turn to Died when the next head coordinate was marked as stone or snake
+                case "extraHealth":
+                    Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
+                    Snake.length -= 1;
+                    // SCORE++
+                    HEALTH++;
+                    drawScore();
+                    drawHealth();
+                    var audio = new Audio('assets/extra-health.mp3');
+                    audio.play();
+                    break;
                 case "stone" :
                 Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
                     //negative snake
@@ -419,7 +435,10 @@
                     var audio = new Audio('assets/eat.mp3');
                     audio.play();
                     if(ALLOW_STONE){
-                        if(30>= SCORE && SCORE >= 5) {
+                        if(checkPrime(SCORE) == true){
+                            produceSingle("extraHealth");
+                        }
+                        else if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
                         }else if(SCORE > 30){
                             produceSingle("stone");
@@ -436,13 +455,16 @@
                     var audio = new Audio('assets/eat.mp3');
                     audio.play();
                     if(ALLOW_STONE){
-                        if(30>= SCORE && SCORE >= 5) {
+                        if(checkPrime(SCORE)){
+                            produceSingle("extraHealth");
+                        }
+                        else if(30>= SCORE && SCORE >= 5) {
                             produceSingle("stone");
+                        }
                         }else if(SCORE > 30){
                             produceSingle("stone");
                             produceSingle("stone");
                         }
-                    }
                     break;
                 default :
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
@@ -631,6 +653,7 @@
             initSnake();
             produceSingle("food");//produce food after init of Snake
             produceSingle("food1");//produce food1 after init of Snake
+            // produceSingle("extraHealth");
             drawScore();
             drawHealth();
             Start();
