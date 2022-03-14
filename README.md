@@ -1,4 +1,5 @@
-## SNAKE GAME - Assignment SE Project - BE2 - Kelompok 4
+# SNAKE GAME
+## Assignment SE Project - BE2 - Kelompok 4
 For Learning Purpose
 
 ## Output
