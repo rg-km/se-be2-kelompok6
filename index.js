@@ -233,11 +233,7 @@
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
             ctx.fillText("Score : " + SCORE, 150, 40);
-            if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
-                HEALTH += 3;
-                var audio = new Audio('assets/level-up.mp3');
-                audio.play();
-            }
+            
         }
         //draw about Snake Health or Life
         function drawHealth(){
@@ -445,6 +441,11 @@
                             produceSingle("stone");
                         }
                     }
+                    if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
+                        HEALTH += 3;
+                        var audio = new Audio('assets/level-up.mp3');
+                        audio.play();
+                    }
                     break;
                 case "food1" ://Eate a food1 and do not pop Snake array , so the snake will increase one size
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
@@ -465,6 +466,11 @@
                             produceSingle("stone");
                             produceSingle("stone");
                         }
+                    if(SCORE == 5 || SCORE == 10 || SCORE == 15 || SCORE == 20){
+                        HEALTH += 3;
+                        var audio = new Audio('assets/level-up.mp3');
+                        audio.play();
+                    }
                     break;
                 default :
                     Snake.unshift(new SnakeNode(coor.x, coor.y, "green", direction));
